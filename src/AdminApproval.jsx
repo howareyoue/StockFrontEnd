@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 export default function AdminApproval() {
 
   const [users, setUsers] = useState([]);
 
-  // ✅ localStorage에 저장된 토큰을 담아 요청 헤더 구성
   const getAuthHeader = () => {
     const token = localStorage.getItem("token");
     return { Authorization: `Bearer ${token}` };
@@ -16,7 +17,7 @@ export default function AdminApproval() {
     try {
 
       const res = await axios.get(
-        "http://localhost:8081/api/admin/pending",
+        `${API_URL}/api/admin/pending`,
         { headers: getAuthHeader() }
       );
 
@@ -40,7 +41,7 @@ export default function AdminApproval() {
     try {
 
       await axios.put(
-        `http://localhost:8081/api/admin/approve/${id}`,
+        `${API_URL}/api/admin/approve/${id}`,
         null,
         { headers: getAuthHeader() }
       );
@@ -61,7 +62,7 @@ export default function AdminApproval() {
     try {
 
       await axios.put(
-        `http://localhost:8081/api/admin/reject/${id}`,
+        `${API_URL}/api/admin/reject/${id}`,
         null,
         { headers: getAuthHeader() }
       );

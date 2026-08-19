@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 export default function History(){
 
     const [history,setHistory]=useState([]);
 
     useEffect(()=>{
 
-        fetch("http://localhost:8081/api/history")
+        fetch(`${API_URL}/api/history`)
         .then(res=>res.json())
         .then(data=>setHistory(data));
 

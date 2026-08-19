@@ -1,12 +1,12 @@
 import { useState } from "react";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 function ProfitCheck() {
 
   const [stockName, setStockName] = useState("");
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
-
-  const API = "http://localhost:8081";
 
   const checkProfit = async () => {
 
@@ -23,7 +23,7 @@ function ProfitCheck() {
       console.log("검색 시작");
 
       const searchRes = await fetch(
-        `${API}/api/profit/search?name=${encodeURIComponent(stockName)}`
+        `${API_URL}/api/profit/search?name=${encodeURIComponent(stockName)}`
       );
 
       console.log("search status =", searchRes.status);
@@ -43,7 +43,7 @@ function ProfitCheck() {
       }
 
       const profitRes = await fetch(
-        `${API}/api/profit/check?code=${searchData.code}`
+        `${API_URL}/api/profit/check?code=${searchData.code}`
       );
 
       console.log("profit status =", profitRes.status);

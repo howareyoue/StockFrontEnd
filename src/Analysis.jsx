@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 export default function Analysis() {
 
   const [stocks, setStocks] = useState([]);
@@ -20,7 +22,7 @@ export default function Analysis() {
     try {
 
       const response = await fetch(
-        "http://localhost:8081/api/stocks/recommend"
+        `${API_URL}/api/stocks/recommend`
       );
 
       const data = await response.json();
@@ -48,7 +50,7 @@ export default function Analysis() {
     try {
 
       const response = await fetch(
-        "http://localhost:8081/api/ai-analysis"
+        `${API_URL}/api/ai-analysis`
       );
 
       const data = await response.json();

@@ -2,6 +2,8 @@ import { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 export default function SignUp() {
 
   const [form, setForm] = useState({
@@ -16,7 +18,7 @@ export default function SignUp() {
     try {
 
       await axios.post(
-        "http://localhost:8081/api/auth/signup",
+        `${API_URL}/api/auth/signup`,
         form
       );
 

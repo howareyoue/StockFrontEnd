@@ -25,6 +25,8 @@ ChartJS.register(
   Filler
 );
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 export default function Statistics() {
 
   const [stats, setStats] = useState({
@@ -53,7 +55,7 @@ export default function Statistics() {
     try {
 
       const res = await fetch(
-        "http://localhost:8081/api/history/statistics"
+        `${API_URL}/api/history/statistics`
       );
 
       const data = await res.json();
@@ -73,7 +75,7 @@ export default function Statistics() {
     try {
 
       const res = await fetch(
-        "http://localhost:8081/api/history"
+        `${API_URL}/api/history`
       );
 
       const data = await res.json();

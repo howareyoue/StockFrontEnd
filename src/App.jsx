@@ -10,6 +10,8 @@ import History from "./History";
 
 import { useCallback, useEffect, useState } from "react";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 function MainPage() {
   const [page, setPage] = useState("recommend");
   const [stocks, setStocks] = useState([]);
@@ -17,11 +19,14 @@ function MainPage() {
   const [isLogin, setIsLogin] = useState(
     !!localStorage.getItem("token")
   );
+  const [role, setRole] = useState(
+    localStorage.getItem("role") || ""
+  );
 
   const loadStocks = useCallback(async () => {
     try {
       const response = await fetch(
-        "http://localhost:8081/api/stocks/recommend"
+        `${API_URL}/api/stocks/recommend`
       );
 
       const data = await response.json();
@@ -39,6 +44,7 @@ function MainPage() {
 
   const logout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("role");
     window.location.reload();
   };
 
@@ -124,12 +130,14 @@ function MainPage() {
             </>
           ) : (
             <>
-              <a
-                href="/admin"
-                className="bg-yellow-500 text-black px-4 py-2 rounded-xl"
-              >
-                관리자
-              </a>
+              {role === "ADMIN" && (
+                <a
+                  href="/admin"
+                  className="bg-yellow-500 text-black px-4 py-2 rounded-xl"
+                >
+                  관리자
+                </a>
+              )}
 
               <button
                 onClick={logout}
